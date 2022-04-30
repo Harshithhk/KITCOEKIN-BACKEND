@@ -1,10 +1,8 @@
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-    "./node_modules/flowbite/**/*.js"
-  ],
+  content: ["./src/**/*.{js,jsx,ts,tsx}", "./node_modules/flowbite/**/*.js"],
   theme: {
     extend: {
+      display: ["group-hover"],
       colors: {
         primary: {
           DEFAULT: "#F07C00",
@@ -33,5 +31,5 @@ module.exports = {
       // => @media (max-width: 639px) { ... }
     },
   },
-  plugins: [require("@tailwindcss/line-clamp"), require('flowbite/plugin')],
+  plugins: [require("@tailwindcss/line-clamp"), require("flowbite/plugin")],
 }
