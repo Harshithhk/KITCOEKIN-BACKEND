@@ -39,4 +39,23 @@ const deleteNotice = async (req, res) => {
   }
 }
 
-export { addNoticeData, getNoticeData, deleteNotice }
+const updateNotice = async (req, res) => {
+  let body = req.body
+  try {
+    let noticeData = await Notice.findOne({ _id: body._id })
+    noticeData.title = body.title
+    noticeData.shortDescription = body.shortDescription
+    noticeData.body = body.body
+    noticeData.featured = body.featured
+    noticeData.duration = body.duration
+    noticeData.date = body.date
+    noticeData.images = body.images
+    noticeData.link = body.link
+    noticeData.save()
+    res.status(200).json({ msg: "notice modified", noticeData })
+  } catch (e) {
+    res.status(400).json(e)
+  }
+}
+
+export { addNoticeData, getNoticeData, deleteNotice, updateNotice }

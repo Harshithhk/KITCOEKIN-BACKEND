@@ -87,11 +87,20 @@ function App() {
   }
 
   const handleSubmit = async (type) => {
+    let body = type === "news" ? newsData : noticeData
     try {
-      let data = await axios.post(
-        `http://localhost:5000/api/newsandnotices/${type}`,
-        type === "news" ? newsData : noticeData
-      )
+      let data
+      if (body._id) {
+        data = await axios.put(
+          `http://localhost:5000/api/newsandnotices/${type}`,
+          body
+        )
+      } else {
+        data = await axios.post(
+          `http://localhost:5000/api/newsandnotices/${type}`,
+          body
+        )
+      }
       window.location.reload()
     } catch (e) {
       console.log(e)
@@ -445,7 +454,7 @@ function App() {
                 </div>
                 <div
                   className="absolute hidden font-bold group-hover:block hover:font-normal text right-3 bottom-2"
-                  // onClick={() => handleDelete("notices", notice._id)}
+                  onClick={() => setNewsData(element)}
                 >
                   Edit
                 </div>
@@ -500,7 +509,7 @@ function App() {
                 </div>
                 <div
                   className="absolute hidden font-bold group-hover:block hover:font-normal text right-3 bottom-2"
-                  // onClick={() => handleDelete("notices", notice._id)}
+                  onClick={() => setNoticeData(notice)}
                 >
                   Edit
                 </div>

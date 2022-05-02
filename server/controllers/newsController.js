@@ -31,7 +31,6 @@ const getNewsData = async (req, res) => {
 }
 
 const deleteNews = async (req, res) => {
-  console.log(req)
   try {
     const newsData = await News.findByIdAndDelete(req.body.id)
     res.send(newsData)
@@ -40,4 +39,23 @@ const deleteNews = async (req, res) => {
   }
 }
 
-export { addNewsData, getNewsData, deleteNews }
+const updateNews = async (req, res) => {
+  let body = req.body
+  try {
+    let newsData = await News.findOne({ _id: body._id })
+    newsData.title = body.title
+    newsData.shortDescription = body.shortDescription
+    newsData.body = body.body
+    newsData.featured = body.featured
+    newsData.duration = body.duration
+    newsData.date = body.date
+    newsData.images = body.images
+    newsData.link = body.link
+    newsData.save()
+    res.status(200).json({ msg: "news modified", newsData })
+  } catch (e) {
+    res.status(400).json(e)
+  }
+}
+
+export { addNewsData, getNewsData, deleteNews, updateNews }
