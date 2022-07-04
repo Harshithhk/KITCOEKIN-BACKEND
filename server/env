@@ -1,0 +1,3 @@
+MONGO_URI=mongodb+srv://root:root@cluster0.nwwbg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+JWT_SECRET=8ac9b07fcee8c1d4a03ca5d72da1af7694a5a75c90ce61a519e3a33941a657c97aef0be01ac43fc809ed62397cc04bb70262dd2a04cf75d359088a04dd62da23
+MODE=DEVELOPMENT
