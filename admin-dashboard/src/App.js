@@ -9,10 +9,12 @@ import Assets from "./assets/index"
 import BaseLayout from "./layouts/BaseLayout"
 
 function App() {
+  const [active, setActive] = useState(0)
+
   return (
-    <div  className="App  flex">
-      <SideNavBar />
-      <BaseLayout />
+    <div className="App  flex">
+      <SideNavBar setActive={setActive} />
+      <BaseLayout setActive={setActive} active={active} />
     </div>
   )
 }
