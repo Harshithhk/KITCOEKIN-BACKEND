@@ -7,7 +7,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 const BodyLayout = ({ active }) => {
   useEffect(() => {
     console.log(active)
-
     return () => {}
   }, [active])
 
