@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import NewsAndNotices from "../NewsAndNotices"
 import Notices from "../Notices"
+import TimeTable from "../TimeTable"
 import ReactDOM from "react-dom/client"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
@@ -14,6 +15,7 @@ const BodyLayout = ({ active }) => {
     <div className="z-0 flex-1 m-2 mt-8 bg-white h-fit rounded-xl drop-shadow-lg ">
       {active === "News & Notices" && <NewsAndNotices />}
       {active === "Events" && <Notices />}
+      {active === "TimeTable" && <TimeTable />}
       {/* <Events />
             <ImageGallery /> */}
     </div>

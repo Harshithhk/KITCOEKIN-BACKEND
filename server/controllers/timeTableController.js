@@ -1,19 +1,19 @@
 import generateToken from "../utils/generateToken.js"
-import Event from "../models/events.js"
+import TimeTable from "../models/timeTable.js"
 
 // @desc     Add Survey Data
 // @route    POST /api/survey/surveyData
 // @access   Public
-const addEventsData = async (req, res) => {
+const addTimeTableData = async (req, res) => {
   const { title } = req.body
   delete req.body._id
-  const existingEvent = await Event.findOne({ title: title })
+  const existingEvent = await TimeTable.findOne({ title: title })
 
   if (existingEvent) {
     res.status(400).json("Event of this title already exists")
   } else {
     try {
-      const eventData = await Event.create(req.body)
+      const eventData = await TimeTable.create(req.body)
 
       res.status(200).json({ msg: "event created", eventData })
     } catch (e) {
@@ -22,22 +22,23 @@ const addEventsData = async (req, res) => {
   }
 }
 
-const getEventsData = async (req, res) => {
+const getTimeTableData = async (req, res) => {
   try {
-    const eventsData = await Event.find()
+    const eventsData = await TimeTable.find()
     res.send(eventsData)
   } catch (e) {
     res.status(400).json(e)
   }
 }
-const deleteEvent = async (req, res) => {
+
+const deleteTimeTable = async (req, res) => {
   try {
     console.log(req.body._id)
-    const eventsData = await Event.findOneAndDelete({ _id: req.body._id })
+    const eventsData = await TimeTable.findOneAndDelete({ _id: req.body._id })
     res.send({ msg: "DELETED" })
   } catch (e) {
     res.status(400).json(e)
   }
 }
 
-export { addEventsData, getEventsData, deleteEvent }
+export { addTimeTableData, getTimeTableData, deleteTimeTable }

@@ -2,10 +2,10 @@ import express from "express"
 
 const router = express.Router()
 import {
-  addEventsData,
-  getEventsData,
-  deleteEvent,
-} from "../controllers/eventsController.js"
+  addTimeTableData,
+  getTimeTableData,
+  deleteTimeTable,
+} from "../controllers/timeTableController.js"
 import { protect } from "../middlewares/authMiddleware.js"
 
 import multer from "multer"
@@ -27,7 +27,7 @@ const fileStorageEngine = multer.diskStorage({
 
 const upload = multer({ storage: fileStorageEngine })
 router.post("/single", upload.single("image"), (req, res) => {
-  console.log(req.file)
+  //   console.log(req.file)
   res.send({ msg: "Single FIle upload success", url: req.file })
 })
 
@@ -35,6 +35,10 @@ router.post("/multiple", upload.array("images", 3), (req, res) => {
   res.send("Multiple Files Upload Success")
 })
 
-router.route("/").post(addEventsData).get(getEventsData).delete(deleteEvent)
+router
+  .route("/")
+  .post(addTimeTableData)
+  .get(getTimeTableData)
+  .delete(deleteTimeTable)
 
 export default router

@@ -8,6 +8,7 @@ import connectDB from "./config/db.js"
 import userRoutes from "./routes/userRoutes.js"
 import newsAndNoticesRoutes from "./routes/newsAndNoticesRoutes.js"
 import eventRoutes from "./routes/eventsRoutes.js"
+import timeTableRoutes from "./routes/timeTableRoutes.js"
 
 dotenv.config()
 
@@ -30,6 +31,7 @@ app.get("/", (req, res) => {
 app.use("/api/users", userRoutes)
 app.use("/api/newsandnotices", newsAndNoticesRoutes)
 app.use("/api/events", eventRoutes)
+app.use("/api/timetable", timeTableRoutes)
 
 const PORT = process.env.PORT || 5000
 
