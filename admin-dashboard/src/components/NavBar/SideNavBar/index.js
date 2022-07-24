@@ -7,6 +7,7 @@ const Menus = [
   { title: "Image Gallery", src: Assets.ImageGallery },
   { title: "Events", src: Assets.Events },
   { title: "TimeTable", src: Assets.Documents },
+  { title: "Teching Staff", src: Assets.Documents },
   { title: "Settings", src: Assets.Settings, gap: true },
 ]
 

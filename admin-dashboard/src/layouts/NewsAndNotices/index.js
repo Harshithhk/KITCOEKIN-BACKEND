@@ -1,4 +1,3 @@
-
 import "../../App.css"
 import axios from "axios"
 import { useEffect, useState } from "react"
@@ -52,13 +51,18 @@ function NewsAndNotices() {
   const [noticeData, setNoticeData] = useState(() => inputNotice)
 
   const callsomeapi = async () => {
-    let newss = await fetch("http://localhost:5000/api/newsandnotices/news")
+    let newss = await fetch(
+      "https://kitcoek.herokuapp.com/api/newsandnotices/news"
+    )
+    // let newss = await fetch("http://localhost:5000/api/newsandnotices/news")
     newss = await newss.json()
 
-    // let notices = await fetch('https://kitcoek-server.herokuapp.com/api/newsandnotices/notices')
     let noticess = await fetch(
-      "http://localhost:5000/api/newsandnotices/notices"
+      "https://kitcoek.herokuapp.com/api/newsandnotices/notices"
     )
+    // let noticess = await fetch(
+    //   "http://localhost:5000/api/newsandnotices/notices"
+    // )
     noticess = await noticess.json()
 
     let updatedNews = newss.map((element) => {
@@ -92,14 +96,22 @@ function NewsAndNotices() {
       let data
       if (body._id) {
         data = await axios.put(
-          `http://localhost:5000/api/newsandnotices/${type}`,
+          `https://kitcoek.herokuapp.com/api/newsandnotices/${type}`,
           body
         )
+        // data = await axios.put(
+        //   `http://localhost:5000/api/newsandnotices/${type}`,
+        //   body
+        // )
       } else {
         data = await axios.post(
-          `http://localhost:5000/api/newsandnotices/${type}`,
+          `https://kitcoek.herokuapp.com/api/newsandnotices/${type}`,
           body
         )
+        // data = await axios.post(
+        //   `http://localhost:5000/api/newsandnotices/${type}`,
+        //   body
+        // )
       }
       window.location.reload()
     } catch (e) {
@@ -111,9 +123,13 @@ function NewsAndNotices() {
     console.log(type, id)
     try {
       let data = await axios.delete(
-        `http://localhost:5000/api/newsandnotices/${type}`,
+        `https://kitcoek.herokuapp.com/api/newsandnotices/${type}`,
         { data: { id: id } }
       )
+      // let data = await axios.delete(
+      //   `http://localhost:5000/api/newsandnotices/${type}`,
+      //   { data: { id: id } }
+      // )
       window.location.reload()
     } catch (e) {
       console.log(e)
@@ -125,7 +141,7 @@ function NewsAndNotices() {
   }, [])
 
   return (
-    <div >
+    <div>
       <section className="flex pt-6 md:mt-8 md:flex-col ">
         <section className="w-1/2 md:w-full pl-[50px] pr-[2.5%] md:p-[16px] ">
           {/* TITLE */}
