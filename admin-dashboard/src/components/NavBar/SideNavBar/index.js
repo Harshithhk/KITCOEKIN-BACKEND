@@ -1,17 +1,33 @@
 import { useState } from "react"
 import Assets from "../../../assets/index"
 
+const Menus = [
+  { title: "Dashboard", src: Assets.Dashboard },
+  { title: "News & Notices", src: Assets.NewsAndNotices },
+  { title: "Image Gallery", src: Assets.ImageGallery },
+  { title: "Events", src: Assets.Events },
+  { title: "TimeTable", src: Assets.Documents },
+  { title: "Teching Staff", src: Assets.Documents },
+  { title: "Settings", src: Assets.Settings, gap: true },
+]
+
 const SideNavBar = ({ setActive }) => {
+  const getIndex = () => {
+    let index = Menus.findIndex(
+      (menu) =>
+        menu.title.toLowerCase().replace(/\s+/g, "") ==
+        window.location.pathname
+          .toLowerCase()
+          .replace(/\s+/g, "")
+          .replace("/", "")
+    )
+    console.log(index)
+    setActive(Menus[index].title)
+    return index
+  }
+
   const [open, setOpen] = useState(true)
-  const [activeIndex, setActiveIndex] = useState(0)
-  const Menus = [
-    { title: "Dashboard", src: Assets.Dashboard },
-    { title: "News & Notices", src: Assets.NewsAndNotices },
-    { title: "Image Gallery", src: Assets.ImageGallery },
-    { title: "Events", src: Assets.Events },
-    { title: "Documents", src: Assets.Documents },
-    { title: "Settings", src: Assets.Settings, gap: true },
-  ]
+  const [activeIndex, setActiveIndex] = useState(() => getIndex())
 
   return (
     <div className="flex ">
@@ -50,34 +66,38 @@ const SideNavBar = ({ setActive }) => {
         </div>
         <ul className="pt-6">
           {Menus.map((Menu, index) => (
-            <li
-              onClick={() => {
-                setActive(Menu.title)
-                setActiveIndex(index)
-              }}
-              key={index}
-              className={`flex  rounded-md p-2 cursor-pointer hover:bg-[#ffffff]   text-base  font-sans font-semibold  items-center gap-x-4 
+            <a href={Menu.title.toLowerCase().replace(/\s+/g, "")}>
+              <li
+                onClick={() => {
+                  setActive(Menu.title)
+                  setActiveIndex(index)
+                }}
+                key={index}
+                className={`flex  rounded-md p-2 cursor-pointer hover:bg-[#ffffff]   text-base  font-sans font-semibold  items-center gap-x-4 
               ${Menu.gap ? "mt-9" : "mt-2"} ${
-                index === activeIndex
-                  ? "bg-[#ffffff] text-[#344767]  drop-shadow-lg  "
-                  : " text-[#707597]"
-              } `}
-            >
-              <div
-                className={`${
                   index === activeIndex
-                    ? "border-2  p-2 shadow-2xl  rounded-[9px] bg-[#17c1e8]"
-                    : "p-2 drop-shadow-xl  rounded-md bg-[#ffffff]"
+                    ? "bg-[#ffffff] text-[#344767]  drop-shadow-lg  "
+                    : " text-[#707597]"
                 } `}
               >
-                {index === activeIndex
-                  ? Menus[index].src("white")
-                  : Menus[index].src("iconColor")}
-              </div>
-              <span className={`${!open && "hidden"} origin-left duration-200`}>
-                {Menu.title}
-              </span>
-            </li>
+                <div
+                  className={`${
+                    index === activeIndex
+                      ? "border-2  p-2 shadow-2xl  rounded-[9px] bg-[#17c1e8]"
+                      : "p-2 drop-shadow-xl  rounded-md bg-[#ffffff]"
+                  } `}
+                >
+                  {index === activeIndex
+                    ? Menus[index].src("white")
+                    : Menus[index].src("iconColor")}
+                </div>
+                <span
+                  className={`${!open && "hidden"} origin-left duration-200`}
+                >
+                  {Menu.title}
+                </span>
+              </li>
+            </a>
           ))}
         </ul>
       </div>

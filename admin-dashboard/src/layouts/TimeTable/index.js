@@ -23,8 +23,7 @@ const Notices = () => {
   const [news, setNews] = useState([])
 
   const getEvents = async () => {
-    let res = await axios.get("https://kitcoek.herokuapp.com/api/events/")
-    // let res = await axios.get("http://localhost:5000/api/events/")
+    let res = await axios.get("https://kitcoek.herokuapp.com/api/timetable/")
     console.log(res)
     setNews(res.data)
   }
@@ -40,7 +39,7 @@ const Notices = () => {
 
     formData.append("image", fileData)
 
-    fetch("https://kitcoek.herokuapp.com/api/events/single", {
+    fetch("https://kitcoek.herokuapp.com/api/timetable/single", {
       method: "POST",
       body: formData,
     })
@@ -50,7 +49,7 @@ const Notices = () => {
         console.log(result)
         try {
           let res = await axios.post(
-            "https://kitcoek.herokuapp.com/api/events/",
+            "https://kitcoek.herokuapp.com/api/timetable/",
             data
           )
           console.log(res)
@@ -74,16 +73,14 @@ const Notices = () => {
 
   const actionDelete = async (id) => {
     try {
-      let res = await axios.delete("http://localhost:5000//api/events/", {
-        data: {
-          _id: id,
-        },
-      })
-      // let res = await axios.delete("http://localhost:5000/api/events/", {
-      //   data: {
-      //     _id: id,
-      //   },
-      // })
+      let res = await axios.delete(
+        "https://kitcoek.herokuapp.com/api/timetable/",
+        {
+          data: {
+            _id: id,
+          },
+        }
+      )
       window.location.reload()
     } catch (e) {
       alert(e)
