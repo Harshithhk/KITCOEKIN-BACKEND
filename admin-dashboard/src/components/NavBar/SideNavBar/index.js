@@ -12,8 +12,6 @@ const Menus = [
   { title: "TimeTable", src: Assets.Documents },
   { title: "Teching Staff", src: Assets.Documents },
   { title: "Settings", src: Assets.Settings, gap: true },
-
-  
 ]
 
 const SideNavBar = ({ setActive }) => {
@@ -49,7 +47,7 @@ const SideNavBar = ({ setActive }) => {
           {Assets.LeftArrowHead}
         </span>
 
-        <div className="flex gap-x-4 items-center">
+        <div className="flex items-center gap-x-4">
           <img
             src={Assets.hashinclude}
             className={`cursor-pointer h-12 w-12  rounded-lg  duration-500 ${
@@ -81,16 +79,15 @@ const SideNavBar = ({ setActive }) => {
                 className={`flex  rounded-md p-2 cursor-pointer hover:bg-[#ffffff]   text-base  font-sans font-semibold  items-center gap-x-4 
                   ${Menu.gap ? "mt-9" : "mt-2"} 
                   ${
-                      index === activeIndex
-                        ? "bg-[#ffffff] text-[#344767]  drop-shadow-lg  "
-                        : " text-[#707597]"
-                    } 
+                    index === activeIndex
+                      ? "bg-[#ffffff] text-[#344767]  drop-shadow-lg  "
+                      : " text-[#707597]"
+                  } 
 
                   ${Menu.noNav ? "hidden" : null}
                 
                 
                 `}
-
               >
                 <div
                   className={`${
@@ -111,6 +108,16 @@ const SideNavBar = ({ setActive }) => {
               </li>
             </a>
           ))}
+          <button
+            className="bg-white"
+            onClick={() => {
+              localStorage.removeItem("authorization")
+              window.location.href = "/"
+            }}
+          >
+            {" "}
+            LOGOUT
+          </button>
         </ul>
       </div>
     </div>
