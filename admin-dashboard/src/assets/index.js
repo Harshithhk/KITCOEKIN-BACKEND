@@ -7,6 +7,10 @@ import Settings from "./icons/settings"
 import Logo from "./images/logo.png"
 import LeftArrowHead from "./icons/leftArrowHead"
 import Home from "./icons/home.js"
+import DesktopError from "./images/desktop.png"
+import ClgLogo from "./images/clgLogo.png"
+import curved from "./images/curved-images/curved-6.jpg"
+
 
 const Assets = {
  "Dashboard": function(props){
@@ -32,6 +36,9 @@ const Assets = {
    },
  "LeftArrowHead": <LeftArrowHead />,
  "hashinclude": Logo,
+ "DesktopError": DesktopError,
+ "ClgLogo":ClgLogo,
+ "Curved":curved
 }
 
 export default Assets

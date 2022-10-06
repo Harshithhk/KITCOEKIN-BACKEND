@@ -2,6 +2,9 @@ import { useState } from "react"
 import Assets from "../../../assets/index"
 
 const Menus = [
+  // { title: "", src: Assets.Settings, noNav: true },
+  // { title: "SignIn", src: Assets.Settings, noNav: true },
+
   { title: "Dashboard", src: Assets.Dashboard },
   { title: "News & Notices", src: Assets.NewsAndNotices },
   { title: "Image Gallery", src: Assets.ImageGallery },
@@ -9,13 +12,15 @@ const Menus = [
   { title: "TimeTable", src: Assets.Documents },
   { title: "Teching Staff", src: Assets.Documents },
   { title: "Settings", src: Assets.Settings, gap: true },
+
+  
 ]
 
 const SideNavBar = ({ setActive }) => {
   const getIndex = () => {
     let index = Menus.findIndex(
       (menu) =>
-        menu.title.toLowerCase().replace(/\s+/g, "") ==
+        menu.title.toLowerCase().replace(/\s+/g, "") ===
         window.location.pathname
           .toLowerCase()
           .replace(/\s+/g, "")
@@ -74,11 +79,18 @@ const SideNavBar = ({ setActive }) => {
                 }}
                 key={index}
                 className={`flex  rounded-md p-2 cursor-pointer hover:bg-[#ffffff]   text-base  font-sans font-semibold  items-center gap-x-4 
-              ${Menu.gap ? "mt-9" : "mt-2"} ${
-                  index === activeIndex
-                    ? "bg-[#ffffff] text-[#344767]  drop-shadow-lg  "
-                    : " text-[#707597]"
-                } `}
+                  ${Menu.gap ? "mt-9" : "mt-2"} 
+                  ${
+                      index === activeIndex
+                        ? "bg-[#ffffff] text-[#344767]  drop-shadow-lg  "
+                        : " text-[#707597]"
+                    } 
+
+                  ${Menu.noNav ? "hidden" : null}
+                
+                
+                `}
+
               >
                 <div
                   className={`${
