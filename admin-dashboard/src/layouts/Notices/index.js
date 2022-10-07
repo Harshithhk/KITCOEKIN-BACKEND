@@ -49,7 +49,7 @@ const Notices = () => {
       .then(async (result) => {
         result = await result.json()
         console.log(data)
-        data.fileUrl = result.url.filename
+        data.fileUrl = result.url.location
         console.log(result)
         try {
           // let res = await axios.post(
@@ -198,7 +198,7 @@ const Notices = () => {
                         {element.title}
                       </td>
                       <td class="text-sm text-orange-500 font-light px-6 py-4 whitespace-nowrap">
-                        {element.fileName}
+                       <a href={element.fileUrl}>{element.fileName}</a> 
                       </td>
                       <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         {element.date}
