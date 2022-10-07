@@ -8,7 +8,7 @@ function BodyLayout(props) {
 
   const handleSubmit = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/users/login", {
+      const res = await axios.post("https://kitcoek.herokuapp.com/api/users/login", {
         name: name,
         password: password,
       })

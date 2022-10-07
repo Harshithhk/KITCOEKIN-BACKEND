@@ -28,7 +28,7 @@ const Notices = () => {
   const [staffs, setStaffs] = useState([])
 
   const getEvents = async () => {
-    let res = await axios.get("http://localhost:5000/api/teachingstaff/")
+    let res = await axios.get("https://kitcoek.herokuapp.com/api/teachingstaff/")
     console.log(res)
     setNews(res.data)
     setStaffs(res.data)
@@ -45,7 +45,7 @@ const Notices = () => {
 
     formData.append("image", fileData)
 
-    fetch("http://localhost:5000/api/teachingstaff/single", {
+    fetch("https://kitcoek.herokuapp.com/api/teachingstaff/single", {
       method: "POST",
       body: formData,
     })
@@ -55,7 +55,7 @@ const Notices = () => {
         console.log(result)
         try {
           let res = await axios.post(
-            "http://localhost:5000/api/teachingstaff/",
+            "https://kitcoek.herokuapp.com/api/teachingstaff/",
             data
           )
           console.log(res)
@@ -82,7 +82,7 @@ const Notices = () => {
 
   const actionDelete = async (id) => {
     try {
-      let res = await axios.delete("http://localhost:5000/api/teachingstaff/", {
+      let res = await axios.delete("https://kitcoek.herokuapp.com/api/teachingstaff/", {
         data: {
           _id: id,
         },
