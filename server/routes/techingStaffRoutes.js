@@ -1,17 +1,13 @@
 import express from "express"
-// s3 changes are below
 
-// start
+// Multer Config
+import multerS3 from "multer-s3"
+import AWS from "aws-sdk"
 
-// let multerS3 = require('multer-s3')
-// const AWS = require('aws-sdk');
-
-// const s3 = new AWS.S3({
-//   accessKeyId: 'AKIA4I6FAR3KLCYDRBNQ',
-//   secretAccessKey: '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'
-// });
-
-// end
+const s3 = new AWS.S3({
+  accessKeyId: "AKIA4I6FAR3KK7AVSVPZ",
+  secretAccessKey: "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",
+})
 
 const router = express.Router()
 import {
@@ -29,36 +25,31 @@ import path, { dirname } from "path"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-const fileStorageEngine = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./public/images") //important this is a direct path fron our current file to storage location
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + "--" + file.originalname)
-  },
-})
-
-const upload = multer({ storage: fileStorageEngine })
-
-// s3 changes are below
-
-//  start
-
-// const upload = multer({
-//   storage: multerS3({
-//     s3: s3,
-//     bucket: 'sfa-future-classroom',
-//     acl: 'public-read',
-//     metadata: function (req, file, cb) {
-//       cb(null, {fieldName: file.fieldname});
-//     },
-//     key: function (req, file, cb) {
-//       cb(null, new Date().toISOString() + file.originalname)
-//     }
-//   })
+// const fileStorageEngine = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "./public/images") //important this is a direct path fron our current file to storage location
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, Date.now() + "--" + file.originalname)
+//   },
 // })
 
-//  end
+// const upload = multer({ storage: fileStorageEngine })
+
+// Uploading to S3
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: "kitcoek",
+    acl: 'public-read',
+    metadata: function (req, file, cb) {
+      cb(null, { fieldName: file.originalname })
+    },
+    key: function (req, file, cb) {
+      cb(null, new Date().toISOString() + file.originalname)
+    },
+  }),
+})
 
 router.post("/single", upload.single("image"), (req, res) => {
   console.log(req.file)
