@@ -7,6 +7,8 @@ const Notices = () => {
     return () => {}
   }, [])
 
+  const url = "https://kitcoek.herokuapp.com/api/events/"
+
   var today = new Date()
   var dd = String(today.getDate()).padStart(2, "0")
   var mm = String(today.getMonth() + 1).padStart(2, "0") //January is 0!
@@ -24,8 +26,8 @@ const Notices = () => {
   const [news, setNews] = useState([])
 
   const getEvents = async () => {
-    // let res = await axios.get("https://kitcoek.herokuapp.com/api/events/")
-    let res = await axios.get("http://localhost:5000/api/events/")
+    let res = await axios.get(url)
+    // let res = await axios.get("http://localhost:5000/api/events/")
     console.log(res)
     setNews(res.data)
   }
@@ -41,22 +43,23 @@ const Notices = () => {
 
     formData.append("image", fileData)
 
-    // fetch("https://kitcoek.herokuapp.com/api/events/single", {
-    fetch("http://localhost:5000/api/events/single", {
+    fetch(url, {
+    // fetch("http://localhost:5000/api/events/single", {
       method: "POST",
       body: formData,
     })
       .then(async (result) => {
         result = await result.json()
         console.log(data)
-        data.fileUrl = result.url.filename
+        data.fileUrl = result.url.location
         console.log(result)
         try {
           // let res = await axios.post(
           //   "https://kitcoek.herokuapp.com/api/events/",
           //   data
           // )
-          let res = await axios.post("http://localhost:5000/api/events/", data)
+          let res = await axios.post(url, data)
+          // let res = await axios.post("http://localhost:5000/api/events/", data)
           console.log(res)
           setData({
             _id: 0,
@@ -78,7 +81,8 @@ const Notices = () => {
 
   const actionDelete = async (id) => {
     try {
-      let res = await axios.delete("http://localhost:5000//api/events/", {
+      let res = await axios.delete(url, {
+      // let res = await axios.delete("http://localhost:5000//api/events/", {
         data: {
           _id: id,
         },
@@ -198,7 +202,7 @@ const Notices = () => {
                         {element.title}
                       </td>
                       <td class="text-sm text-orange-500 font-light px-6 py-4 whitespace-nowrap">
-                        {element.fileName}
+                       <a href={element.fileUrl}>{element.fileName}</a> 
                       </td>
                       <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         {element.date}
