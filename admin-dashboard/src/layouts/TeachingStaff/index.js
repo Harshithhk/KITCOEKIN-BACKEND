@@ -6,6 +6,8 @@ const Notices = () => {
     return () => {}
   }, [])
 
+  const url = "https://kitcoek.herokuapp.com/api/teachingstaff/"
+
   var today = new Date()
   var dd = String(today.getDate()).padStart(2, "0")
   var mm = String(today.getMonth() + 1).padStart(2, "0") //January is 0!
@@ -28,7 +30,7 @@ const Notices = () => {
   const [staffs, setStaffs] = useState([])
 
   const getEvents = async () => {
-    let res = await axios.get("https://kitcoek.herokuapp.com/api/teachingstaff/")
+    let res = await axios.get(url)
     console.log(res)
     setNews(res.data)
     setStaffs(res.data)
@@ -45,17 +47,17 @@ const Notices = () => {
 
     formData.append("image", fileData)
 
-    fetch("https://kitcoek.herokuapp.com/api/teachingstaff/single", {
+    fetch(url+"single", {
       method: "POST",
       body: formData,
     })
       .then(async (result) => {
         result = await result.json()
-        data.imgUrl = result.url.filename
+        data.imgUrl = result.url.location
         console.log(result)
         try {
           let res = await axios.post(
-            "https://kitcoek.herokuapp.com/api/teachingstaff/",
+            url,
             data
           )
           console.log(res)
@@ -82,7 +84,7 @@ const Notices = () => {
 
   const actionDelete = async (id) => {
     try {
-      let res = await axios.delete("https://kitcoek.herokuapp.com/api/teachingstaff/", {
+      let res = await axios.delete(url, {
         data: {
           _id: id,
         },

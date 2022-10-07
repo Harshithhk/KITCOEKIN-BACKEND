@@ -6,6 +6,9 @@ const Notices = () => {
     return () => {}
   }, [])
 
+
+  const url = "https://kitcoek.herokuapp.com/api/timetable/"
+
   var today = new Date()
   var dd = String(today.getDate()).padStart(2, "0")
   var mm = String(today.getMonth() + 1).padStart(2, "0") //January is 0!
@@ -23,7 +26,7 @@ const Notices = () => {
   const [news, setNews] = useState([])
 
   const getEvents = async () => {
-    let res = await axios.get("https://kitcoek.herokuapp.com/api/timetable/")
+    let res = await axios.get(url)
     console.log(res)
     setNews(res.data)
   }
@@ -39,17 +42,17 @@ const Notices = () => {
 
     formData.append("image", fileData)
 
-    fetch("https://kitcoek.herokuapp.com/api/timetable/single", {
+    fetch(url+"single", {
       method: "POST",
       body: formData,
     })
       .then(async (result) => {
         result = await result.json()
-        data.fileUrl = result.url.filename
+        data.fileUrl = result.url.location
         console.log(result)
         try {
           let res = await axios.post(
-            "https://kitcoek.herokuapp.com/api/timetable/",
+            url,
             data
           )
           console.log(res)
@@ -74,7 +77,7 @@ const Notices = () => {
   const actionDelete = async (id) => {
     try {
       let res = await axios.delete(
-        "https://kitcoek.herokuapp.com/api/timetable/",
+        url,
         {
           data: {
             _id: id,
@@ -191,7 +194,7 @@ const Notices = () => {
                         {element.title}
                       </td>
                       <td class="text-sm text-orange-500 font-light px-6 py-4 whitespace-nowrap">
-                        {element.fileName}
+                       <a href={element.fileUrl}> {element.fileUrl}</a>
                       </td>
                       <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         {element.date}
