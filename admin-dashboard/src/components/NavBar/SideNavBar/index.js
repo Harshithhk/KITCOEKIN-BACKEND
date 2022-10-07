@@ -11,7 +11,9 @@ const Menus = [
   { title: "Events", src: Assets.Events },
   { title: "TimeTable", src: Assets.Documents },
   { title: "Teching Staff", src: Assets.Documents },
-  { title: "Settings", src: Assets.Settings, gap: true },
+  { title: "Profile", src: Assets.Settings, gap: true },
+  { title: "Settings", src: Assets.Settings },
+  
 ]
 
 const SideNavBar = ({ setActive }) => {
@@ -108,17 +110,9 @@ const SideNavBar = ({ setActive }) => {
               </li>
             </a>
           ))}
-          <button
-            className="bg-white"
-            onClick={() => {
-              localStorage.removeItem("authorization")
-              window.location.href = "/"
-            }}
-          >
-            {" "}
-            LOGOUT
-          </button>
+         
         </ul>
+      
       </div>
     </div>
   )

@@ -21,9 +21,9 @@ function PageLayout(props) {
       setIsLoggedIn(false)
     }
   }
-  useEffect(() => {
-    callSomeAPI()
-  }, [])
+    useEffect(() => {
+      callSomeAPI()
+    }, [])
 
   return (
     <>
