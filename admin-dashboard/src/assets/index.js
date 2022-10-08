@@ -10,6 +10,7 @@ import Home from "./icons/home.js"
 import DesktopError from "./images/desktop.png"
 import ClgLogo from "./images/clgLogo.png"
 import curved from "./images/curved-images/curved-6.jpg"
+import underdev from "./images/asd.jpg"
 
 
 const Assets = {
@@ -38,7 +39,8 @@ const Assets = {
  "hashinclude": Logo,
  "DesktopError": DesktopError,
  "ClgLogo":ClgLogo,
- "Curved":curved
+ "Curved":curved,
+ "underdev":underdev
 }
 
 export default Assets

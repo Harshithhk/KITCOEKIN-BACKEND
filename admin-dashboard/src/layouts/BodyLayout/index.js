@@ -5,6 +5,7 @@ import TimeTable from "../TimeTable"
 import TeachingStaff from "../TeachingStaff"
 import ReactDOM from "react-dom/client"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Dashboard from "../Dashboard"
 
 const BodyLayout = ({ active }) => {
   useEffect(() => {
@@ -18,6 +19,10 @@ const BodyLayout = ({ active }) => {
       {active === "Events" && <Notices />}
       {active === "TimeTable" && <TimeTable />}
       {active === "Teching Staff" && <TeachingStaff />}
+      {active === "Dashboard" && <Dashboard />}
+      {active === "Profile" && <Dashboard />}
+      {active === "Settings" && <Dashboard />}
+      {active === "Image Gallery" && <Dashboard />}
       {/* <Events />
             <ImageGallery /> */}
     </div>
