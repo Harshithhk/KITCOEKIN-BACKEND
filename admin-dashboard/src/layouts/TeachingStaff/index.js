@@ -24,6 +24,7 @@ const Notices = () => {
     email: "",
     mobile: "",
     department: "Computer Science",
+    type: "PG",
     imgUrl: "/avatar.png",
   })
   const [news, setNews] = useState([])
@@ -47,7 +48,7 @@ const Notices = () => {
 
     formData.append("image", fileData)
 
-    fetch(url+"single", {
+    fetch(url + "single", {
       method: "POST",
       body: formData,
     })
@@ -56,10 +57,7 @@ const Notices = () => {
         data.imgUrl = result.url.location
         console.log(result)
         try {
-          let res = await axios.post(
-            url,
-            data
-          )
+          let res = await axios.post(url, data)
           console.log(res)
           setData({
             name: "",
@@ -69,6 +67,7 @@ const Notices = () => {
             email: "",
             mobile: "",
             department: "",
+            type: "",
           })
           //TODO find a way to clear the input (type = file )
           window.location.reload()
@@ -198,7 +197,7 @@ const Notices = () => {
         <div class="flex items-center mb-6 ml-5 ">
           <div class="md:w-1/3">
             <label
-              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4 "
               for="inline-password"
             >
               Email
@@ -254,6 +253,25 @@ const Notices = () => {
             <option value="Environmental">Environmental</option>
           </select>
         </div>
+        <div class="flex items-center mb-6 ml-1 ">
+          <label
+            class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-1"
+            for="inline-password"
+          >
+            Type.
+          </label>
+          <select
+            id="countries"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[75px]  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            onChange={(e) => setData({ ...data, type: e.target.value })}
+          >
+            <option value="PG" selected>
+              P.G
+            </option>
+            <option value="UG">U.G</option>
+            <option value="non_teaching">non teaching</option>
+          </select>
+        </div>
         <div class="flex items-center mb-7  ">
           <button
             className="flex items-center justify-center w-32 h-12 mt-1 ml-5 bg-slate-400"
@@ -265,7 +283,7 @@ const Notices = () => {
       </form>
 
       <div class="flex flex-col border-t-4">
-        <div className="flex ml-6 items-center mt-5 mb-5 border-2 w-fit px-5 py-2 ">
+        <div className="flex items-center px-5 py-2 mt-5 mb-5 ml-6 border-2 w-fit ">
           <label htmlFor="" className="mr-4">
             Filter Department
           </label>
@@ -329,6 +347,12 @@ const Notices = () => {
                       scope="col"
                       class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
                     >
+                      Type
+                    </th>
+                    <th
+                      scope="col"
+                      class="text-sm font-medium text-gray-900 px-6  py-4 text-center"
+                    >
                       Email
                     </th>
                     <th
@@ -361,6 +385,9 @@ const Notices = () => {
                         <td class="text-sm text-orange-500 font-light px-6 py-4 whitespace-nowrap">
                           {element.experience}
                         </td>
+                        <td class="text-sm text-orange-500 font-light px-6 py-4 whitespace-nowrap">
+                          {element.type}
+                        </td>
                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                           {element.email}
                         </td>
@@ -370,7 +397,7 @@ const Notices = () => {
                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                           <button
                             onClick={() => actionDelete(element._id)}
-                            className="bg-slate-600 text-white px-3 py-2"
+                            className="px-3 py-2 text-white bg-slate-600"
                           >
                             Delete
                           </button>

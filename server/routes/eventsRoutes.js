@@ -41,7 +41,7 @@ const upload = multer({
   storage: multerS3({
     s3: s3,
     bucket: "kitcoek",
-    acl: 'public-read',
+    acl: "public-read",
     metadata: function (req, file, cb) {
       cb(null, { fieldName: file.originalname })
     },
@@ -52,7 +52,6 @@ const upload = multer({
 })
 
 router.post("/single", upload.single("image"), (req, res) => {
-  
   res.send({ msg: "Single FIle upload success", url: req.file })
 })
 

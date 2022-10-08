@@ -25,6 +25,7 @@ const addTimeTableData = async (req, res) => {
 const getTimeTableData = async (req, res) => {
   try {
     const eventsData = await TimeTable.find()
+    console.log(eventsData)
     res.send(eventsData)
   } catch (e) {
     res.status(400).json(e)

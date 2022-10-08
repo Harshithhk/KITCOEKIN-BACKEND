@@ -6,7 +6,6 @@ const Notices = () => {
     return () => {}
   }, [])
 
-
   const url = "https://kitcoek.herokuapp.com/api/timetable/"
 
   var today = new Date()
@@ -18,7 +17,6 @@ const Notices = () => {
 
   const [fileData, setFileData] = useState()
   const [data, setData] = useState({
-    _id: 0,
     title: "",
     fileName: "",
     date: today,
@@ -42,19 +40,17 @@ const Notices = () => {
 
     formData.append("image", fileData)
 
-    fetch(url+"single", {
+    fetch(url + "single", {
       method: "POST",
       body: formData,
     })
       .then(async (result) => {
         result = await result.json()
+        console.log(result)
         data.fileUrl = result.url.location
         console.log(result)
         try {
-          let res = await axios.post(
-            url,
-            data
-          )
+          let res = await axios.post(url, data)
           console.log(res)
           setData({
             _id: 0,
@@ -76,14 +72,11 @@ const Notices = () => {
 
   const actionDelete = async (id) => {
     try {
-      let res = await axios.delete(
-        url,
-        {
-          data: {
-            _id: id,
-          },
-        }
-      )
+      let res = await axios.delete(url, {
+        data: {
+          _id: id,
+        },
+      })
       window.location.reload()
     } catch (e) {
       alert(e)
@@ -159,7 +152,7 @@ const Notices = () => {
                       scope="col"
                       class="text-sm max-w-[600px] font-medium text-gray-900 px-6 py-4 text-center"
                     >
-                      News
+                      Title
                     </th>
                     <th
                       scope="col"
@@ -194,7 +187,7 @@ const Notices = () => {
                         {element.title}
                       </td>
                       <td class="text-sm text-orange-500 font-light px-6 py-4 whitespace-nowrap">
-                       <a href={element.fileUrl}> {element.fileUrl}</a>
+                        <a href={element.fileUrl}> {element.fileName}</a>
                       </td>
                       <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         {element.date}
