@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
+import CircleLoader from "react-spinners/ClipLoader"
+import { CSSProperties } from "react"
+
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+}
+
 const Notices = () => {
   useEffect(() => {
     getEvents()
@@ -29,6 +38,10 @@ const Notices = () => {
   })
   const [news, setNews] = useState([])
   const [staffs, setStaffs] = useState([])
+  let [loading, setLoading] = useState(false)
+  let [color, setColor] = useState("#ffffff")
+
+  const [busy, setBusy] = useState(false)
 
   const getEvents = async () => {
     let res = await axios.get(url)
@@ -40,9 +53,42 @@ const Notices = () => {
   const fileChangeHandler = (e) => {
     setFileData(e.target.files[0])
   }
+  const isEmpty = (val) => {
+    if (val === null || val === "" || val === undefined) {
+      return true
+    } else {
+      return false
+    }
+  }
 
+  const validateFormData = () => {
+    if (
+      isEmpty(data.name) ||
+      isEmpty(data.designation) ||
+      isEmpty(data.qualifications) ||
+      isEmpty(data.experience) ||
+      isEmpty(data.email) ||
+      isEmpty(data.mobile) ||
+      isEmpty(data.department) ||
+      isEmpty(data.type)
+    ) {
+      alert("Please make sure to fill all fields")
+      return false
+    } else {
+      return true
+    }
+  }
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (loading) {
+      return
+    }
+    console.log(validateFormData())
+    if (!validateFormData()) {
+      return
+    }
+
+    setLoading(true)
 
     const formData = new FormData()
 
@@ -73,10 +119,13 @@ const Notices = () => {
           window.location.reload()
           // getEvents()
         } catch (err) {
+          setLoading(false)
           console.log(err)
         }
       })
       .catch((err) => {
+        setLoading(false)
+
         alert(err.message)
       })
   }
@@ -187,7 +236,11 @@ const Notices = () => {
           <div class="w-[80px]">
             <input
               value={data.experience}
-              onChange={(e) => setData({ ...data, experience: e.target.value })}
+              onChange={(e) => {
+                var reg = new RegExp("^[0-9]*$")
+                if (reg.test(e.target.value))
+                  setData({ ...data, experience: e.target.value })
+              }}
               class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               id="inline-full-name"
               type="text"
@@ -225,7 +278,11 @@ const Notices = () => {
           <div class="md:w-2/3">
             <input
               value={data.mobile}
-              onChange={(e) => setData({ ...data, mobile: e.target.value })}
+              onChange={(e) => {
+                var reg = new RegExp("^[0-9]*$")
+                if (reg.test(e.target.value))
+                  setData({ ...data, mobile: e.target.value })
+              }}
               class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               id="inline-full-name"
               type="text"
@@ -253,7 +310,9 @@ const Notices = () => {
             <option value="Environmental">Environmental</option>
           </select>
         </div>
-        <div class="flex items-center mb-6 ml-1 ">
+      </form>
+      <form class="w-full flex  p-6">
+        <div class="flex items-center mb-6 ml-5 ">
           <label
             class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-1"
             for="inline-password"
@@ -272,12 +331,24 @@ const Notices = () => {
             <option value="non_teaching">non teaching</option>
           </select>
         </div>
+
         <div class="flex items-center mb-7  ">
           <button
             className="flex items-center justify-center w-32 h-12 mt-1 ml-5 bg-slate-400"
             onClick={(e) => handleSubmit(e)}
           >
-            SAVE
+            {loading ? (
+              <CircleLoader
+                color={color}
+                loading={loading}
+                cssOverride={override}
+                size={20}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            ) : (
+              "SAVE"
+            )}
           </button>
         </div>
       </form>
