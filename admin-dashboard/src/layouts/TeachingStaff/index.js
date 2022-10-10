@@ -6,7 +6,7 @@ import { CSSProperties } from "react"
 const override = {
   display: "block",
   margin: "0 auto",
-  borderColor: "red",
+  borderColor: "blue",
 }
 
 const Notices = () => {

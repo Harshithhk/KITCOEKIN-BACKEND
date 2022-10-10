@@ -1,6 +1,14 @@
 import "../../App.css"
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { CSSProperties } from "react"
+import CircleLoader from "react-spinners/ClipLoader"
+
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "blue",
+}
 
 function NewsAndNotices() {
   const month = [
@@ -19,7 +27,8 @@ function NewsAndNotices() {
   ]
   const [news, setNews] = useState([])
   const [notices, setNotices] = useState([])
-
+  let [loading, setLoading] = useState(false)
+  let [color, setColor] = useState("#ffffff")
   const inputNews = {
     title: "Secondy Dummy text for printing & typesetting industry 2",
     duration: [
@@ -91,6 +100,10 @@ function NewsAndNotices() {
   }
 
   const handleSubmit = async (type) => {
+    if (loading) {
+      return
+    }
+    setLoading(true)
     let body = type === "news" ? newsData : noticeData
     try {
       let data
@@ -289,7 +302,18 @@ function NewsAndNotices() {
               onClick={() => handleSubmit("news")}
               className="px-4 py-2 mt-4 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded-lg hover:bg-blue-500 hover:text-white hover:border-transparent"
             >
-              Submit
+              {loading ? (
+                <CircleLoader
+                  color={color}
+                  loading={loading}
+                  cssOverride={override}
+                  size={20}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              ) : (
+                "SAVE"
+              )}{" "}
             </button>
           </div>
         </section>
@@ -435,7 +459,18 @@ function NewsAndNotices() {
               onClick={() => handleSubmit("notices")}
               className="px-4 py-2 mt-4 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded-lg hover:bg-blue-500 hover:text-white hover:border-transparent"
             >
-              Submit
+              {loading ? (
+                <CircleLoader
+                  color={color}
+                  loading={loading}
+                  cssOverride={override}
+                  size={20}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              ) : (
+                "SAVE"
+              )}{" "}
             </button>
           </div>
         </section>

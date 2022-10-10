@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from "react"
+import CircleLoader from "react-spinners/ClipLoader"
 import axios from "axios"
+
+import { CSSProperties } from "react"
+
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "blue",
+}
+
 const Notices = () => {
   useEffect(() => {
     getEvents()
@@ -15,6 +25,9 @@ const Notices = () => {
   var yyyy = today.getFullYear()
 
   today = mm + "-" + dd + "-" + yyyy
+
+  let [loading, setLoading] = useState(false)
+  let [color, setColor] = useState("#ffffff")
 
   const [fileData, setFileData] = useState()
   const [data, setData] = useState({
@@ -38,13 +51,17 @@ const Notices = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (loading) {
+      return
+    }
+    setLoading(true)
 
     const formData = new FormData()
 
     formData.append("image", fileData)
 
-    fetch(url+"single", {
-    // fetch("https://kitcoek.herokuapp.com/api/events/single", {
+    fetch(url + "single", {
+      // fetch("https://kitcoek.herokuapp.com/api/events/single", {
       method: "POST",
       body: formData,
     })
@@ -82,7 +99,7 @@ const Notices = () => {
   const actionDelete = async (id) => {
     try {
       let res = await axios.delete(url, {
-      // let res = await axios.delete("https://kitcoek.herokuapp.com//api/events/", {
+        // let res = await axios.delete("https://kitcoek.herokuapp.com//api/events/", {
         data: {
           _id: id,
         },
@@ -147,7 +164,18 @@ const Notices = () => {
           className="flex items-center justify-center w-40 h-12 mt-1 ml-5 bg-slate-400"
           onClick={(e) => handleSubmit(e)}
         >
-          SAVE
+          {loading ? (
+            <CircleLoader
+              color={color}
+              loading={loading}
+              cssOverride={override}
+              size={20}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          ) : (
+            "SAVE"
+          )}
         </button>
       </form>
       <div class="flex flex-col">
@@ -202,7 +230,7 @@ const Notices = () => {
                         {element.title}
                       </td>
                       <td class="text-sm text-orange-500 font-light px-6 py-4 whitespace-nowrap">
-                       <a href={element.fileUrl}>{element.fileName}</a> 
+                        <a href={element.fileUrl}>{element.fileName}</a>
                       </td>
                       <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         {element.date}

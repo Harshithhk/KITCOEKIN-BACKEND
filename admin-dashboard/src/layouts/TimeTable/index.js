@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react"
 import axios from "axios"
+import { CSSProperties } from "react"
+import CircleLoader from "react-spinners/ClipLoader"
+
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "blue",
+}
+
 const Notices = () => {
   useEffect(() => {
     getEvents()
@@ -22,7 +31,8 @@ const Notices = () => {
     date: today,
   })
   const [news, setNews] = useState([])
-
+  let [loading, setLoading] = useState(false)
+  let [color, setColor] = useState("#ffffff")
   const getEvents = async () => {
     let res = await axios.get(url)
     console.log(res)
@@ -35,7 +45,10 @@ const Notices = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
+    if (loading) {
+      return
+    }
+    setLoading(true)
     const formData = new FormData()
 
     formData.append("image", fileData)
@@ -132,7 +145,18 @@ const Notices = () => {
           className="flex items-center justify-center w-40 h-12 mt-1 ml-5 bg-slate-400"
           onClick={(e) => handleSubmit(e)}
         >
-          SAVE
+          {loading ? (
+            <CircleLoader
+              color={color}
+              loading={loading}
+              cssOverride={override}
+              size={20}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          ) : (
+            "SAVE"
+          )}{" "}
         </button>
       </form>
       <div class="flex flex-col">
