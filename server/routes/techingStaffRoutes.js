@@ -49,7 +49,12 @@ const upload = multer({
   }),
 })
 
-router.post("/single", upload.single("image"), (req, res) => {
+router.post("/singleimage", upload.single("image"), (req, res) => {
+  res.send({ msg: "Single Image upload success", url: req.file })
+})
+
+router.post("/singlefile", upload.single("image"), (req, res) => {
+  console.log(res)
   res.send({ msg: "Single FIle upload success", url: req.file })
 })
 
