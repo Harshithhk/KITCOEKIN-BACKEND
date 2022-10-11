@@ -108,19 +108,33 @@ function NewsAndNotices() {
     try {
       let data
       if (body._id) {
-        data = await axios.put(
-          `https://kitcoek.herokuapp.com/api/newsandnotices/${type}`,
-          body
-        )
+        try {
+          data = await axios.put(
+            `https://kitcoek.herokuapp.com/api/newsandnotices/${type}`,
+            body
+          )
+        } catch (e) {
+          alert(
+            "something went wrong, please check your data entered or try again later"
+          )
+          setLoading(false)
+        }
         // data = await axios.put(
         //   `https://kitcoek.herokuapp.com/api/newsandnotices/${type}`,
         //   body
         // )
       } else {
-        data = await axios.post(
-          `https://kitcoek.herokuapp.com/api/newsandnotices/${type}`,
-          body
-        )
+        try {
+          data = await axios.post(
+            `https://kitcoek.herokuapp.com/api/newsandnotices/${type}`,
+            body
+          )
+        } catch (e) {
+          alert(
+            "something went wrong, please check your data entered or try again later"
+          )
+          setLoading(false)
+        }
         // data = await axios.post(
         //   `https://kitcoek.herokuapp.com/api/newsandnotices/${type}`,
         //   body
