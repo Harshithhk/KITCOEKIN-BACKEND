@@ -444,8 +444,15 @@ const Notices = () => {
                           index % 2 == 0 ? "bg-gray-100" : ""
                         } border-b`}
                       >
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          {element.name}
+                        <td class="px-6  flex  py-3 items-center  gap-3  whitespace-nowrap text-sm font-medium text-gray-900">
+                          <div className="h-16 w-16 rounded-full overflow-hidden border-orange-200 border-4 ">
+                            <img
+                              src={element.imgUrl}
+                              className="h-full w-full"
+                              alt=""
+                            />
+                          </div>
+                          <div>{element.name}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                           {element.designation}
