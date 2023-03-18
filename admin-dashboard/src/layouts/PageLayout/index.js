@@ -12,7 +12,7 @@ function PageLayout(props) {
   const callSomeAPI = async () => {
     try {
       const res = await axios.get(
-        "http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/users/profile",
+        "http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/api/users/profile",
         {
           headers: { authorization: localStorage.getItem("authorization") },
         }

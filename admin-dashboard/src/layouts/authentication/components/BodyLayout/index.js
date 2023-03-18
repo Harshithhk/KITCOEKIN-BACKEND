@@ -9,7 +9,7 @@ function BodyLayout(props) {
   const handleSubmit = async () => {
     try {
       const res = await axios.post(
-        "http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/users/login",
+        "http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/api/users/login",
         {
           name: name,
           password: password,

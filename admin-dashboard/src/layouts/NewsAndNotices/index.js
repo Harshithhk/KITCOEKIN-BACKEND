@@ -61,16 +61,16 @@ function NewsAndNotices() {
 
   const callsomeapi = async () => {
     let newss = await fetch(
-      "http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/newsandnotices/news"
+      "http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/api/newsandnotices/news"
     )
-    // let newss = await fetch("http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/newsandnotices/news")
+    // let newss = await fetch("http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/api/newsandnotices/news")
     newss = await newss.json()
 
     let noticess = await fetch(
-      "http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/newsandnotices/notices"
+      "http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/api/newsandnotices/notices"
     )
     // let noticess = await fetch(
-    //   "http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/newsandnotices/notices"
+    //   "http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/api/newsandnotices/notices"
     // )
     noticess = await noticess.json()
 
@@ -110,7 +110,7 @@ function NewsAndNotices() {
       if (body._id) {
         try {
           data = await axios.put(
-            `http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/newsandnotices/${type}`,
+            `http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/api/newsandnotices/${type}`,
             body
           )
         } catch (e) {
@@ -120,13 +120,13 @@ function NewsAndNotices() {
           setLoading(false)
         }
         // data = await axios.put(
-        //   `http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/newsandnotices/${type}`,
+        //   `http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/api/newsandnotices/${type}`,
         //   body
         // )
       } else {
         try {
           data = await axios.post(
-            `http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/newsandnotices/${type}`,
+            `http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/api/newsandnotices/${type}`,
             body
           )
         } catch (e) {
@@ -136,7 +136,7 @@ function NewsAndNotices() {
           setLoading(false)
         }
         // data = await axios.post(
-        //   `http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/newsandnotices/${type}`,
+        //   `http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/api/newsandnotices/${type}`,
         //   body
         // )
       }
@@ -150,11 +150,11 @@ function NewsAndNotices() {
     console.log(type, id)
     try {
       let data = await axios.delete(
-        `http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/newsandnotices/${type}`,
+        `http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/api/newsandnotices/${type}`,
         { data: { id: id } }
       )
       // let data = await axios.delete(
-      //   `http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/newsandnotices/${type}`,
+      //   `http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/api/newsandnotices/${type}`,
       //   { data: { id: id } }
       // )
       window.location.reload()

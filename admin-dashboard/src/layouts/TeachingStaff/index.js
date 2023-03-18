@@ -16,7 +16,7 @@ const Notices = () => {
   }, [])
 
   const url =
-    "http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/teachingstaff/"
+    "http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/api/teachingstaff/"
 
   var today = new Date()
   var dd = String(today.getDate()).padStart(2, "0")
