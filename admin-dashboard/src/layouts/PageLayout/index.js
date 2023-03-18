@@ -11,12 +11,9 @@ function PageLayout(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(true)
   const callSomeAPI = async () => {
     try {
-      const res = await axios.get(
-        "http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/api/users/profile",
-        {
-          headers: { authorization: localStorage.getItem("authorization") },
-        }
-      )
+      const res = await axios.get("http://localhost:8080//api/users/profile", {
+        headers: { authorization: localStorage.getItem("authorization") },
+      })
       console.log(res)
       setIsLoggedIn(true)
     } catch (e) {
