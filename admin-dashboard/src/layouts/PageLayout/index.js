@@ -11,7 +11,7 @@ function PageLayout(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(true)
   const callSomeAPI = async () => {
     try {
-      const res = await axios.get("https://kitcoek.herokuapp.com/api/users/profile", {
+      const res = await axios.get("http://localhost:8080/api/users/profile", {
         headers: { authorization: localStorage.getItem("authorization") },
       })
       console.log(res)
@@ -21,9 +21,9 @@ function PageLayout(props) {
       setIsLoggedIn(false)
     }
   }
-    useEffect(() => {
-      callSomeAPI()
-    }, [])
+  useEffect(() => {
+    callSomeAPI()
+  }, [])
 
   return (
     <>

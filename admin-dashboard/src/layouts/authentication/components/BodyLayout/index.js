@@ -8,13 +8,10 @@ function BodyLayout(props) {
 
   const handleSubmit = async () => {
     try {
-      const res = await axios.post(
-        "https://kitcoek.herokuapp.com/api/users/login",
-        {
-          name: name,
-          password: password,
-        }
-      )
+      const res = await axios.post("http://localhost:8080/api/users/login", {
+        name: name,
+        password: password,
+      })
       localStorage.setItem("authorization", res.data.token)
       window.location.href = "/news&notices"
     } catch (e) {

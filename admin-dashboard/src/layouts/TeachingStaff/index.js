@@ -15,7 +15,7 @@ const Notices = () => {
     return () => {}
   }, [])
 
-  const url = "https://kitcoek.herokuapp.com/api/teachingstaff/"
+  const url = "http://localhost:8080/api/teachingstaff/"
 
   var today = new Date()
   var dd = String(today.getDate()).padStart(2, "0")
