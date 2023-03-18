@@ -60,15 +60,15 @@ function NewsAndNotices() {
   const [noticeData, setNoticeData] = useState(() => inputNotice)
 
   const callsomeapi = async () => {
-    let newss = await fetch("http://localhost:8080//api/newsandnotices/news")
-    // let newss = await fetch("http://localhost:8080//api/newsandnotices/news")
+    let newss = await fetch("http://localhost:8080/api/newsandnotices/news")
+    // let newss = await fetch("http://localhost:8080/api/newsandnotices/news")
     newss = await newss.json()
 
     let noticess = await fetch(
-      "http://localhost:8080//api/newsandnotices/notices"
+      "http://localhost:8080/api/newsandnotices/notices"
     )
     // let noticess = await fetch(
-    //   "http://localhost:8080//api/newsandnotices/notices"
+    //   "http://localhost:8080/api/newsandnotices/notices"
     // )
     noticess = await noticess.json()
 
@@ -108,7 +108,7 @@ function NewsAndNotices() {
       if (body._id) {
         try {
           data = await axios.put(
-            `http://localhost:8080//api/newsandnotices/${type}`,
+            `http://localhost:8080/api/newsandnotices/${type}`,
             body
           )
         } catch (e) {
@@ -118,13 +118,13 @@ function NewsAndNotices() {
           setLoading(false)
         }
         // data = await axios.put(
-        //   `http://localhost:8080//api/newsandnotices/${type}`,
+        //   `http://localhost:8080/api/newsandnotices/${type}`,
         //   body
         // )
       } else {
         try {
           data = await axios.post(
-            `http://localhost:8080//api/newsandnotices/${type}`,
+            `http://localhost:8080/api/newsandnotices/${type}`,
             body
           )
         } catch (e) {
@@ -134,7 +134,7 @@ function NewsAndNotices() {
           setLoading(false)
         }
         // data = await axios.post(
-        //   `http://localhost:8080//api/newsandnotices/${type}`,
+        //   `http://localhost:8080/api/newsandnotices/${type}`,
         //   body
         // )
       }
@@ -148,11 +148,11 @@ function NewsAndNotices() {
     console.log(type, id)
     try {
       let data = await axios.delete(
-        `http://localhost:8080//api/newsandnotices/${type}`,
+        `http://localhost:8080/api/newsandnotices/${type}`,
         { data: { id: id } }
       )
       // let data = await axios.delete(
-      //   `http://localhost:8080//api/newsandnotices/${type}`,
+      //   `http://localhost:8080/api/newsandnotices/${type}`,
       //   { data: { id: id } }
       // )
       window.location.reload()
