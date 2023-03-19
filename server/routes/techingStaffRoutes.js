@@ -17,8 +17,8 @@ import { protect } from "../middlewares/authMiddleware.js"
 
 import multer from "multer"
 const s3 = new AWS.S3({
-  accessKeyId: "AKIA4I6FAR3KK7AVSVPZ",
-  secretAccessKey: "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",
+  accessKeyId: "AKIAWABUOTYHQMLXC2NX",
+  secretAccessKey: "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",
 })
 
 const __filename = fileURLToPath(import.meta.url)
