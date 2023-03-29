@@ -6,6 +6,7 @@ import TeachingStaff from "../TeachingStaff"
 import ReactDOM from "react-dom/client"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Dashboard from "../Dashboard"
+import KITGallery from "../Image Gallery"
 
 const BodyLayout = ({ active }) => {
   useEffect(() => {
@@ -22,7 +23,7 @@ const BodyLayout = ({ active }) => {
       {active === "Dashboard" && <Dashboard />}
       {active === "Profile" && <Dashboard />}
       {active === "Settings" && <Dashboard />}
-      {active === "Image Gallery" && <Dashboard />}
+      {active === "Image Gallery" && <KITGallery />}
       {/* <Events />
             <ImageGallery /> */}
     </div>

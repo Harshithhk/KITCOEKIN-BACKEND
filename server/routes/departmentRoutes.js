@@ -1,15 +1,5 @@
 import express from "express"
 
-const router = express.Router()
-import {
-  addEventsData,
-  getEventsData,
-  deleteEvent,
-} from "../controllers/eventsController.js"
-import { protect } from "../middlewares/authMiddleware.js"
-
-import multer from "multer"
-
 import { fileURLToPath } from "url"
 import path, { dirname } from "path"
 
@@ -17,8 +7,11 @@ import path, { dirname } from "path"
 import multerS3 from "multer-s3"
 import AWS from "aws-sdk"
 
+const router = express.Router()
+import { addImageGallery } from "../controllers/imageGalleryController.js"
+
+import multer from "multer"
 const s3 = new AWS.S3({
-  
   accessKeyId: "AKIAWABUOTYHQMLXC2NX",
   secretAccessKey: "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",
 })
@@ -37,7 +30,6 @@ const fileStorageEngine = multer.diskStorage({
 
 // const upload = multer({ storage: fileStorageEngine })
 
-// Uploading to S3
 const upload = multer({
   storage: multerS3({
     s3: s3,
@@ -51,14 +43,10 @@ const upload = multer({
   }),
 })
 
-router.post("/single", upload.single("image"), (req, res) => {
-  res.send({ msg: "Single FIle upload success", url: req.file })
+router.post("/imagegallery/singleimage", upload.single("image"), (req, res) => {
+  res.send({ msg: "Single Image upload success", url: req.file })
 })
 
-// router.post("/multiple", upload.array("images", 3), (req, res) => {
-//   res.send("Multiple Files Upload Success")
-// })
-
-router.route("/").post(addEventsData).get(getEventsData).delete(deleteEvent)
+router.route("/imagegallery").post(addImageGallery)
 
 export default router
