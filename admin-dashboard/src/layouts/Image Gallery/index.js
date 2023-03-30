@@ -75,7 +75,8 @@ const KITGallery = () => {
   }, [])
 
   const uploadUrl = `${BASE_ROUTE}/api/department/imagegallery/singleimage`
-  const createUrl = `${BASE_ROUTE}/api/department/imagegallery`
+  const imageDataUrl = `${BASE_ROUTE}/api/department/imagegallery`
+  const deleteImageUrl = `${BASE_ROUTE}/api/department/imagegallery`
 
   var today = new Date()
   var dd = String(today.getDate()).padStart(2, "0")
@@ -97,7 +98,9 @@ const KITGallery = () => {
   const [news, setNews] = useState([])
 
   const getEvents = async () => {
-    return
+    const imageGalleryResponse = await axios.get(imageDataUrl)
+    console.log(imageGalleryResponse.data)
+    setNews(imageGalleryResponse.data)
   }
 
   const fileChangeHandler = (e) => {
@@ -134,7 +137,7 @@ const KITGallery = () => {
           //   "http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8000:8080/api/events/",
           //   data
           // )
-          let res = await axios.post(createUrl, requestData)
+          let res = await axios.post(imageDataUrl, requestData)
           // let res = await axios.post("http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8000:8080/api/events/", data)
           console.log(res)
           setData({
@@ -155,25 +158,19 @@ const KITGallery = () => {
       })
   }
 
-  // const actionDelete = async (id) => {
-  //   try {
-  //     let res = await axios.delete(url, {
-  //       // let res = await axios.delete("https://kitcoek.herokuapp.com//api/events/", {
-  //       data: {
-  //         _id: id,
-  //       },
-  //     })
-  //     // let res = await axios.delete("http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8000:8080/api/events/", {
-  //     //   data: {
-  //     //     _id: id,
-  //     //   },
-  //     // })
-  //     window.location.reload()
-  //   } catch (e) {
-  //     alert(e)
-  //     console.log(e)
-  //   }
-  // }
+  const actionDelete = async (id) => {
+    try {
+      let res = await axios.delete(deleteImageUrl, {
+        data: {
+          _id: id,
+        },
+      })
+      window.location.reload()
+    } catch (e) {
+      alert(e)
+      console.log(e)
+    }
+  }
 
   const [departmentName, setDepartmentName] = useState("")
 
@@ -259,17 +256,18 @@ const KITGallery = () => {
                     >
                       #
                     </th>
-                    <th
-                      scope="col"
-                      class="text-sm max-w-[600px] font-medium text-gray-900 px-6 py-4 text-center"
-                    >
-                      News
-                    </th>
+
                     <th
                       scope="col"
                       class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
                     >
                       File Name
+                    </th>
+                    <th
+                      scope="col"
+                      class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
+                    >
+                      Department
                     </th>
                     <th
                       scope="col"
@@ -294,23 +292,30 @@ const KITGallery = () => {
                       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {index}
                       </td>
-                      <td class="text-sm max-w-[600px] text-gray-900 font-light px-6 py-4">
-                        {element.title}
-                      </td>
+
                       <td class="text-sm text-orange-500 font-light px-6 py-4 whitespace-nowrap">
-                        <a href={element.fileUrl}>{element.fileName}</a>
+                        <a href={element.fileUrl}>
+                          <img
+                            src={element.fileUrl}
+                            alt={element.fileUrl}
+                            className="h-[100px]"
+                          />
+                        </a>
+                      </td>
+                      <td class="text-sm max-w-[600px] text-gray-900 font-light px-6 py-4">
+                        {element.department}
                       </td>
                       <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {element.date}
+                        {element.createdAt}
                       </td>
-                      {/* <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         <button
                           onClick={() => actionDelete(element._id)}
                           className="px-3 py-2 text-white bg-slate-600"
                         >
                           Delete
                         </button>
-                      </td> */}
+                      </td>
                     </tr>
                   ))}
               </table>

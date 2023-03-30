@@ -17,8 +17,7 @@ const Notices = () => {
     return () => {}
   }, [])
 
-  const url =
-    "http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/api/events/"
+  const url = "http://localhost:5000/api/events/"
 
   var today = new Date()
   var dd = String(today.getDate()).padStart(2, "0")
@@ -41,7 +40,7 @@ const Notices = () => {
 
   const getEvents = async () => {
     let res = await axios.get(url)
-    // let res = await axios.get("http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/api/events/")
+    // let res = await axios.get("http://localhost:5000/api/events/")
     console.log(res)
     setNews(res.data)
   }
@@ -62,7 +61,7 @@ const Notices = () => {
     formData.append("image", fileData)
 
     fetch(url + "single", {
-      // fetch("http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/api/events/single", {
+      // fetch("http://localhost:5000/api/events/single", {
       method: "POST",
       body: formData,
     })
@@ -73,11 +72,11 @@ const Notices = () => {
         console.log(result)
         try {
           // let res = await axios.post(
-          //   "http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/api/events/",
+          //   "http://localhost:5000/api/events/",
           //   data
           // )
           let res = await axios.post(url, data)
-          // let res = await axios.post("http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/api/events/", data)
+          // let res = await axios.post("http://localhost:5000/api/events/", data)
           console.log(res)
           setData({
             _id: 0,
@@ -105,7 +104,7 @@ const Notices = () => {
           _id: id,
         },
       })
-      // let res = await axios.delete("http://ec2-13-235-33-19.ap-south-1.compute.amazonaws.com:8080/api/events/", {
+      // let res = await axios.delete("http://localhost:5000/api/events/", {
       //   data: {
       //     _id: id,
       //   },

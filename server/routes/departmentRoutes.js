@@ -8,7 +8,11 @@ import multerS3 from "multer-s3"
 import AWS from "aws-sdk"
 
 const router = express.Router()
-import { addImageGallery } from "../controllers/imageGalleryController.js"
+import {
+  addImageGallery,
+  deleteImageGalleryData,
+  getImageGalleryData,
+} from "../controllers/imageGalleryController.js"
 
 import multer from "multer"
 const s3 = new AWS.S3({
@@ -47,6 +51,10 @@ router.post("/imagegallery/singleimage", upload.single("image"), (req, res) => {
   res.send({ msg: "Single Image upload success", url: req.file })
 })
 
-router.route("/imagegallery").post(addImageGallery)
+router
+  .route("/imagegallery")
+  .post(addImageGallery)
+  .get(getImageGalleryData)
+  .delete(deleteImageGalleryData)
 
 export default router

@@ -15,4 +15,25 @@ const addImageGallery = async (req, res) => {
   }
 }
 
-export { addImageGallery }
+const getImageGalleryData = async (req, res) => {
+  try {
+    const imageGalleryData = await ImageGallery.find()
+    res.send(imageGalleryData)
+  } catch (e) {
+    res.status(400).json(e)
+  }
+}
+
+const deleteImageGalleryData = async (req, res) => {
+  try {
+    console.log(req.body._id)
+    const imageGalleryData = await ImageGallery.findOneAndDelete({
+      _id: req.body._id,
+    })
+    res.send({ msg: "DELETED" })
+  } catch (e) {
+    res.status(400).json(e)
+  }
+}
+
+export { addImageGallery, getImageGalleryData, deleteImageGalleryData }
