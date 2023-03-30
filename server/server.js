@@ -11,6 +11,7 @@ import eventRoutes from "./routes/eventsRoutes.js"
 import timeTableRoutes from "./routes/timeTableRoutes.js"
 import techingStaffRoutes from "./routes/techingStaffRoutes.js"
 import departmentRoutes from "./routes/departmentRoutes.js"
+import alumniRoutes from "./routes/alumniRoutes.js"
 
 dotenv.config()
 
@@ -35,6 +36,7 @@ app.use("/api/newsandnotices", newsAndNoticesRoutes)
 app.use("/api/events", eventRoutes)
 app.use("/api/timetable", timeTableRoutes)
 app.use("/api/department", departmentRoutes)
+app.use("/api/alumni", alumniRoutes)
 app.use("/api/teachingstaff", techingStaffRoutes)
 
 const PORT = process.env.PORT || 5000
