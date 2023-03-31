@@ -11,6 +11,7 @@ const Menus = [
   { title: "Events", src: Assets.Events },
   { title: "TimeTable", src: Assets.Documents },
   { title: "Teching Staff", src: Assets.Documents },
+  {title: "Alumni", src: Assets.Documents},
   { title: "Profile", src: Assets.Settings, gap: true },
   { title: "Settings", src: Assets.Settings },
   

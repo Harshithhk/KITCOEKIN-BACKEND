@@ -29,6 +29,9 @@ const Assets = {
  "Documents": function(props){
   return <Documents color={props}/>
  },
+ "Alumni": function(props){
+   return <Documents color={props} />
+ },
  "Settings": function(props){
   return <Settings color={props}/>
  },
