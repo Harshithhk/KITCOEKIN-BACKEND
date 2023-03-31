@@ -8,6 +8,22 @@ const override = {
   margin: "0 auto",
   borderColor: "blue",
 }
+const branchPlacement = [
+  "Biotechnology Engineering",
+  "Civil Engineering",
+
+  "Computer Science & Engineering",
+
+  "Electronics & Telecommunication",
+
+  "Electronics Engineering",
+
+  "Environmental Engineering",
+
+  "Information Technology",
+  "Mechanical Engineering",
+  "Production Engineering",
+]
 
 const Notices = () => {
   useEffect(() => {
@@ -301,13 +317,11 @@ const Notices = () => {
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[175px] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             onChange={(e) => setData({ ...data, department: e.target.value })}
           >
-            <option value="Computer Science" selected>
-              Computer Science
-            </option>
-            <option value="Electronics">Electronics</option>
-            <option value="Biotech">Biotech</option>
-            <option value="Mech.">Mech.</option>
-            <option value="Environmental">Environmental</option>
+            {branchPlacement?.map((dept) => (
+              <option key={dept} value={dept} selected>
+                {dept}
+              </option>
+            ))}
           </select>
         </div>
       </form>
