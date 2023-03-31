@@ -211,7 +211,7 @@ const Alumni = () => {
           </div>
           <div class="md:w-2/3">
           <select onChange={(event) => setData({...data, department: event.target.value})}>
-              <option value="" disbaled hidden>
+              <option value="" disabled hidden>
                 -------------
               </option>
               {branchPlacement.map((dep) => (
