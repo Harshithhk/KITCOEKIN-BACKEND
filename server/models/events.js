@@ -6,15 +6,31 @@ const eventSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    fileName: {
+    shortDescription: {
       type: String,
       required: false,
     },
-    fileUrl: {
+    body: {
       type: String,
+      required: false,
+    },
+    featured: {
+      type: Boolean,
+      required: false,
+    },
+    duration: {
+      type: [String],
       required: false,
     },
     date: {
+      type: Date,
+      required: true,
+    },
+    images: {
+      type: [String],
+      required: false,
+    },
+    link: {
       type: String,
       required: false,
     },

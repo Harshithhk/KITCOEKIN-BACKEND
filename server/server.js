@@ -6,8 +6,8 @@ import bodyParser from "body-parser"
 import connectDB from "./config/db.js"
 
 import userRoutes from "./routes/userRoutes.js"
-import newsAndNoticesRoutes from "./routes/newsAndNoticesRoutes.js"
-import eventRoutes from "./routes/eventsRoutes.js"
+import newsAndEventsRoutes from "./routes/newsAndEventsRoutes.js"
+import noticeRoutes from "./routes/noticesRoutes.js"
 import timeTableRoutes from "./routes/timeTableRoutes.js"
 import techingStaffRoutes from "./routes/techingStaffRoutes.js"
 import departmentRoutes from "./routes/departmentRoutes.js"
@@ -32,8 +32,8 @@ app.get("/", (req, res) => {
 })
 
 app.use("/api/users", userRoutes)
-app.use("/api/newsandnotices", newsAndNoticesRoutes)
-app.use("/api/events", eventRoutes)
+app.use("/api/newsandevents", newsAndEventsRoutes)
+app.use("/api/notices", noticeRoutes)
 app.use("/api/timetable", timeTableRoutes)
 app.use("/api/department", departmentRoutes)
 app.use("/api/alumni", alumniRoutes)
