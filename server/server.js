@@ -12,6 +12,8 @@ import timeTableRoutes from "./routes/timeTableRoutes.js"
 import techingStaffRoutes from "./routes/techingStaffRoutes.js"
 import departmentRoutes from "./routes/departmentRoutes.js"
 import alumniRoutes from "./routes/alumniRoutes.js"
+import contactRoutes from "./routes/contactRoutes.js"
+import enquiryRoutes from "./routes/enquiryRoutes.js"
 
 dotenv.config()
 
@@ -38,6 +40,8 @@ app.use("/api/timetable", timeTableRoutes)
 app.use("/api/department", departmentRoutes)
 app.use("/api/alumni", alumniRoutes)
 app.use("/api/teachingstaff", techingStaffRoutes)
+app.use("/api/contact", contactRoutes)
+app.use("/api/enquiry", enquiryRoutes)
 
 const PORT = process.env.PORT || 5000
 
