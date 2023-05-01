@@ -18,9 +18,8 @@ import multerS3 from "multer-s3"
 import AWS from "aws-sdk"
 
 const s3 = new AWS.S3({
-  
-  accessKeyId: "AKIAWABUOTYHQMLXC2NX",
-  secretAccessKey: "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",
+  accessKeyId: process.env.ACCESSKEYID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY,
 })
 
 const __filename = fileURLToPath(import.meta.url)
