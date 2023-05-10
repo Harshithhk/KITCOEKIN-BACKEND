@@ -16,8 +16,8 @@ import {
 
 import multer from "multer"
 const s3 = new AWS.S3({
-  accessKeyId: "AKIAWABUOTYHQMLXC2NX",
-  secretAccessKey: "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",
+  accessKeyId: process.env.ACCESSKEYID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY,
 })
 
 const upload = multer({
