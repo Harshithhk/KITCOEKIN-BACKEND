@@ -1,12 +1,46 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
 const alumniSchema = mongoose.Schema(
   {
-    firstName: {
+    photoUrl: {
       type: String,
-      required: true,
+      required: false,
     },
-    lastName: {
+    name: {
+      first_name: {
+        type: String,
+        required: true,
+      },
+      middle_name: {
+        type: String,
+        required: false,
+      },
+      last_name: {
+        type: String,
+        required: true,
+      },
+    },
+    date_of_birth: {
+      type: String,
+      required: false,
+    },
+    phone: {
+      type: String,
+      required: false,
+    },
+    pass_out_year: {
+      type: String,
+      required: false,
+    },
+    branch: {
+      type: String,
+      required: false,
+    },
+    company: {
+      type: String,
+      required: false,
+    },
+    designation: {
       type: String,
       required: false,
     },
@@ -14,49 +48,52 @@ const alumniSchema = mongoose.Schema(
       type: String,
       required: false,
     },
-    phoneNumber: {
+    password: {
       type: String,
       required: false,
     },
-    prn: {
+    permanent_address: {
+      permanent_street: {
         type: String,
         required: false,
-    },
-    city: {
+      },
+      permanent_district: {
         type: String,
         required: false,
-    },
-    latitude: {
-        type: Number,
-        required: false
-    },
-    longitude: {
-        type: Number,
-        required: false
-    },
-    yearOfGraduation: {
-        type: Number,
-        required: false
-    },
-    department: {
+      },
+      permanent_state: {
         type: String,
-        required: false
-    },
-    active: {
-        type: Boolean,
-        required: true,
-        default: true
-    },
-    image: {
+        required: false,
+      },
+      permanent_country: {
         type: String,
-        required: false
-    }
-},
+        required: false,
+      },
+    },
+    current_address: {
+      display_name: {
+        type: String,
+        required: false,
+      },
+      address: {
+        type: Object,
+        required: false,
+      },
+      lat: {
+        type: Number,
+        required: false,
+      },
+      lon: {
+        type: Number,
+        required: false,
+      },
+    },
+  },
   {
     timestamps: true,
   }
-)
+);
 
-const Alumni = mongoose.model("Alumni", alumniSchema)
+const Alumni = mongoose.model("Alumni", alumniSchema);
 
-export default Alumni
+export default Alumni;
