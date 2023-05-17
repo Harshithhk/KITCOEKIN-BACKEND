@@ -87,6 +87,10 @@ const alumniSchema = mongoose.Schema(
         type: Number,
         required: false,
       },
+      accountStatus: {
+        type: Number,
+        required: false,
+      },
     },
   },
   {
