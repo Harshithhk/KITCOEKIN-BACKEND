@@ -10,9 +10,13 @@ import {
 import multerS3 from "multer-s3"
 import AWS from "aws-sdk"
 import multer from "multer"
+
+import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+dotenv.config()
+
 const s3 = new AWS.S3({
-  accessKeyId: process.env.ACCESSKEYID,
-  secretAccessKey: process.env.SECRET_ACCESS_KEY,
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 })
 
 const upload = multer({
