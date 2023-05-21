@@ -46,7 +46,8 @@ const alumniSchema = mongoose.Schema(
     },
     email: {
       type: String,
-      required: false,
+      required: true,
+      index: true, unique: true
     },
     password: {
       type: String,
@@ -89,8 +90,11 @@ const alumniSchema = mongoose.Schema(
       },
       
     },
+    // ACTIVE
+    // PENDING
+    // INACTIVE
     accountStatus: {
-      type: Number,
+      type: String,
       required: false,
     },
   },
@@ -100,5 +104,6 @@ const alumniSchema = mongoose.Schema(
 );
 
 const Alumni = mongoose.model("Alumni", alumniSchema);
+Alumni.createIndexes();
 
 export default Alumni;

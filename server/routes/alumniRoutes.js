@@ -3,6 +3,7 @@ import {
   getAlumniData,
   addAlumni,
   deleteAlumniData,
+  updateAlumni
 } from "../controllers/alumniController.js"
 
 // Multer Config
@@ -33,7 +34,7 @@ router.post("/alumniimage", upload.single("image"), (req, res) => {
   res.send({ msg: "Single Image upload success", url: req.file })
 })
 
-router.route("/").get(getAlumniData).post(upload.single("image"),addAlumni).delete(deleteAlumniData)
+router.route("/").get(getAlumniData).post(upload.single("image"),addAlumni).put(upload.single("image"),updateAlumni).delete(deleteAlumniData)
 
 export default router
 

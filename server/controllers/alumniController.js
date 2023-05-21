@@ -1,24 +1,29 @@
 import Alumni from "../models/alumni.js"
 
 
+const updateAlumni = async (req, res) => {
+  try {
+    const { id } = req.params; // Assuming you pass the alumni ID in the request URL
+    const { name, email, batch } = req.body; // Assuming you want to update name, email, and batch
+
+    // Update the alumni data in the database
+    const updatedAlumni = await Alumni.findByIdAndUpdate(
+      id,
+      { name, email, batch },
+      { new: true }
+    );
+
+    res.status(200).json({ msg: "Alumni data updated", alumniData: updatedAlumni });
+  } catch (e) {
+    res.status(400).json(e);
+  }
+};
+
 // @access Public
 const addAlumni = async (req, res) => {
-  let oldObject = await Alumni.find(req.body.email)
-  if(oldObject){
     try {
       
-      const imageLocation = req.file ? req.file.location : null
-      req.body.photoUrl = imageLocation
-      const alumniData = await Alumni.updateOne({ _id:oldObject.id }, { $set: req.body })
-      
-      res.status(200).json({ msg: "alumni created", alumniData })
-    } catch (e) {
-      res.status(400).json(e)
-    }
-  }
-    try {
-      
-      console.log(req.body)
+      // console.log(req.body)
       const imageLocation = req.file ? req.file.location : null
       req.body.photoUrl = imageLocation
       const alumniData = await Alumni.create(req.body)
@@ -51,4 +56,4 @@ const addAlumni = async (req, res) => {
   }
 
 
-export {addAlumni, getAlumniData, deleteAlumniData}
+export {addAlumni, getAlumniData, deleteAlumniData, updateAlumni}
