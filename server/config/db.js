@@ -3,6 +3,9 @@ import mongoose from "mongoose"
 const connectDB = async () => {
   console.log(process.env.MONGO_URI)
   try {
+    
+    mongoose.set('useFindAndModify', false);
+
     const conn = await mongoose.connect(
       "mongodb+srv://Harshith:Harshith@cluster0.sdqvr.mongodb.net/?retryWrites=true&w=majority",
       {

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import bcrypt from  'bcryptjs'
 const alumniSchema = mongoose.Schema(
   {
     photoUrl: {
@@ -9,7 +9,7 @@ const alumniSchema = mongoose.Schema(
     name: {
       first_name: {
         type: String,
-        required: true,
+        required: false,
       },
       middle_name: {
         type: String,
@@ -17,7 +17,7 @@ const alumniSchema = mongoose.Schema(
       },
       last_name: {
         type: String,
-        required: true,
+        required: false,
       },
     },
     date_of_birth: {
@@ -82,11 +82,11 @@ const alumniSchema = mongoose.Schema(
       },
       lat: {
         type: Number,
-        required: false,
+        required: true,
       },
       lon: {
         type: Number,
-        required: false,
+        required: true,
       },
       
     },
@@ -97,12 +97,40 @@ const alumniSchema = mongoose.Schema(
       type: String,
       required: false,
     },
+    bytes: {
+      type: String,
+      required: false,
+    },
   },
   {
     timestamps: true,
   }
 );
 
+
+alumniSchema.methods.matchPassword = async function(enteredPasswrod){
+  return await bcrypt.compare(enteredPasswrod, this.password)
+}
+
+alumniSchema.pre('save', async function(next){
+  if(!this.isModified('password')){
+      next()
+  }
+
+  const salt = await bcrypt.genSalt(10)
+  this.password =await bcrypt.hash(this.password,salt)
+})
+
+alumniSchema.pre('findOneAndUpdate', async function(next){
+  const update = this.getUpdate();
+
+  if (update && update.password) {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(update.password, salt);
+    this.setUpdate({ password: hashedPassword });
+  }
+
+  })
 const Alumni = mongoose.model("Alumni", alumniSchema);
 Alumni.createIndexes();
 
